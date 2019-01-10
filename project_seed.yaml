@@ -1,0 +1,48 @@
+project_seed:
+  accounts:
+  - 012345678987
+  - '987654321012'
+  asset_insight_id: '000000'
+  financial_identifier: '000000'
+  resource_owner: mathew.zachariah@thomsonreuters.com
+  project_name: projectname
+  service_name: servicename
+  source_bucket: a000000-iac-source
+  archive_name: projectname/dev/dryrun/config.zip
+  template_bucket_name: a000000-iac-source
+  template_key_prefix: iac-test-prefix
+  deployment_engine_version: 1.0.0
+  region: us-east-1
+  log_retention: 90
+  spring_config_urls:
+    mySpringConfig1: http://ex.config1.url
+    mySpringconfig2: http://ex.config2.url
+  environments:
+  - name: dev
+    environment_type: DEVELOPMENT
+    iam_role: arn:aws:iam::012345678987:role/service-role/a000000-project-code-deploy
+    notification_emails:
+    - ex.user1@thomsonreuters.com
+    - ex.user2@thomsonreuters.com
+    stages:
+    - name: infra
+      type: cloudformation
+    - name: rds
+      type: python
+    dryrun_enabled: true
+    delete_access_iam_roles:
+    - a000000-AdminUser
+  - name: prod
+    environment_type: PRODUCTION
+    iam_role: arn:aws:iam::012345678987:role/service-role/a000000-project-code-deploy
+    notification_emails:
+    - ex.user1@thomsonreuters.com
+    - ex.user2@thomsonreuters.com
+    stages:
+    - name: infra
+      type: cloudformation
+    - name: rds
+      type: python
+    dryrun_enabled: true
+    delete_access_iam_roles:
+    - a000000-AdminUser
